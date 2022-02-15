@@ -1,5 +1,5 @@
 Issue 1. Consider defining a bean of type 'org.springframework.security.oauth2.jwt.JwtDecoder' in your configuration.
-Sol:
+Soulution::
 Add this missing property in bootstrap.properties
 ==> spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8180/auth/realms/microservices-realm
 
@@ -10,3 +10,8 @@ The bean 'tokenRelayGatewayFilterFactory', defined in class path resource [org/s
 Solution::
 Consider renaming one of the beans or enabling overriding by setting 
 spring.main.allow-bean-definition-overriding=true
+
+Issue 3
+Login Page issue in Postman 
+Solution:: (This change is needed when you want to hit the apis from Postman Authorization feature)
+Change ApiGateway service as OAuth2 resource server instead of OAuth2 Client (see Part 2 revised Video) 
