@@ -1,0 +1,4 @@
+Issue 1. Consider defining a bean of type 'org.springframework.security.oauth2.jwt.JwtDecoder' in your configuration.
+Sol:
+Add this missing property in bootstrap.properties
+==> spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8180/auth/realms/microservices-realm
