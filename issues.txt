@@ -2,3 +2,11 @@ Issue 1. Consider defining a bean of type 'org.springframework.security.oauth2.j
 Sol:
 Add this missing property in bootstrap.properties
 ==> spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8180/auth/realms/microservices-realm
+
+
+Issue 2
+The bean 'tokenRelayGatewayFilterFactory', defined in class path resource [org/springframework/cloud/security/oauth2/gateway/TokenRelayAutoConfiguration.class], could not be registered. A bean with that name has already been defined in class path resource 
+[org/springframework/cloud/gateway/config/GatewayAutoConfiguration$TokenRelayConfiguration.class] and overriding is disabled.
+Solution::
+Consider renaming one of the beans or enabling overriding by setting 
+spring.main.allow-bean-definition-overriding=true
