@@ -3,7 +3,6 @@ Soulution::
 Add this missing property in bootstrap.properties
 ==> spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8180/auth/realms/microservices-realm
 
-
 Issue 2
 The bean 'tokenRelayGatewayFilterFactory', defined in class path resource [org/springframework/cloud/security/oauth2/gateway/TokenRelayAutoConfiguration.class], could not be registered. A bean with that name has already been defined in class path resource 
 [org/springframework/cloud/gateway/config/GatewayAutoConfiguration$TokenRelayConfiguration.class] and overriding is disabled.
@@ -23,3 +22,14 @@ order-service (service to service)
 Solution ::
 JWT issuer property was missing
 spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8180/auth/realms/microservices-realm
+
+Issue 5
+Can not find local variable securityContextHolder after adding the resilliance library,
+Solution::
+This is because we protected the call from a Circuit Breaker.
+so for this reason resilliance will call the inventory service in different thread than the main thread.
+In this  there is no access available for the security context, so for this reason it throws the exception.
+Overide default value of Spring Security
+
+
+
