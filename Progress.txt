@@ -1,0 +1,5 @@
+Part 3 
+Order Service Feign Client AuthorizationException
+cureently resolved as copied files and dependencies from tutorial repo
+
+==> To debug the cause

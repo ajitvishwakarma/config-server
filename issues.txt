@@ -13,5 +13,13 @@ spring.main.allow-bean-definition-overriding=true
 
 Issue 3
 Login Page issue in Postman 
-Solution:: (This change is needed when you want to hit the apis from Postman Authorization feature)
+Solution::
+(This change is needed when you want to hit the apis from Postman Authorization feature)
 Change ApiGateway service as OAuth2 resource server instead of OAuth2 Client (see Part 2 revised Video) 
+
+Issue 4
+Feign Clinet Authorization was failing(UnAuthorized 401) while inventory service call from 
+order-service (service to service)
+Solution ::
+JWT issuer property was missing
+spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8180/auth/realms/microservices-realm
