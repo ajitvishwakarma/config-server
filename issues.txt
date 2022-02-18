@@ -1,29 +1,30 @@
-Issue 1. Consider defining a bean of type 'org.springframework.security.oauth2.jwt.JwtDecoder' in your configuration.
+==> Issue 1
+Consider defining a bean of type 'org.springframework.security.oauth2.jwt.JwtDecoder' in your configuration.
 Soulution::
 Add this missing property in bootstrap.properties
 ==> spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8180/auth/realms/microservices-realm
 
-Issue 2
+==> Issue 2
 The bean 'tokenRelayGatewayFilterFactory', defined in class path resource [org/springframework/cloud/security/oauth2/gateway/TokenRelayAutoConfiguration.class], could not be registered. A bean with that name has already been defined in class path resource 
 [org/springframework/cloud/gateway/config/GatewayAutoConfiguration$TokenRelayConfiguration.class] and overriding is disabled.
 Solution::
 Consider renaming one of the beans or enabling overriding by setting 
 spring.main.allow-bean-definition-overriding=true
 
-Issue 3
+==> Issue 3
 Login Page issue in Postman 
 Solution::
 (This change is needed when you want to hit the apis from Postman Authorization feature)
 Change ApiGateway service as OAuth2 resource server instead of OAuth2 Client (see Part 2 revised Video) 
 
-Issue 4
+==> Issue 4
 Feign Clinet Authorization was failing(UnAuthorized 401) while inventory service call from 
 order-service (service to service)
 Solution ::
 JWT issuer property was missing
 spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8180/auth/realms/microservices-realm
 
-Issue 5
+==> Issue 5
 Can not find local variable securityContextHolder after adding the resilliance library,
 Solution::
 This is because we protected the call from a Circuit Breaker.
@@ -31,5 +32,10 @@ so for this reason resilliance will call the inventory service in different thre
 In this  there is no access available for the security context, so for this reason it throws the exception.
 Overide default value of Spring Security
 
-
-
+==> Issue 6
+class org.springframework.cloud.sleuth.instrument.circuitbreaker.TraceCircuitBreaker cannot be cast
+ to class org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreaker
+Solution::
+As mentioned in the Spring Cloud Sleuth documentation, you have to dissable sleuth circuit breaker. 
+It can just be solved adding the following property in the application.properties: 
+spring.seuth.circuitbreaker.enabled=false
